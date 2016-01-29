@@ -67,7 +67,7 @@ To upgrade to newer releases:
   1. Download the updated Docker image:
 
   ```bash
-  docker pull sameersbn/skype:latest
+  docker pull mdouchement/zoom-us:latest
   ```
 
   2. Run `install` to make sure the host scripts are updated.
