@@ -4,6 +4,8 @@
 FROM debian:jessie
 MAINTAINER mdouchement
 
+ARG ZOOM_URL=https://zoom.us/client/latest/zoom_1.1.44485.0317_amd64.deb
+
 ENV DEBIAN_FRONTEND noninteractive
 
 # Enable i386 arch
@@ -23,13 +25,14 @@ RUN apt-get install -qy curl sudo desktop-file-utils lib32z1 libx11-6:i386 libeg
   libglib2.0-0 libgl1-mesa-glx libxrender1 libxcomposite1 libxslt1.1 \
   libgstreamer0.10-0 libgstreamer-plugins-base0.10-0 libxi6 libsm6 \
   libfontconfig1 libpulse0 libsqlite3-0 \
-  libxcb-shape0 libxcb-xfixes0 libxcb-randr0 libxcb-image0
+  libxcb-shape0 libxcb-xfixes0 libxcb-randr0 libxcb-image0 \
+  libxcb-keysyms1 libxcb-xtest0
 
 
 # Grab the client .deb
 # Install the client .deb
 # Cleanup
-RUN curl -sSL https://www.zoom.us/client/latest/zoom_1.1.38634.0127_amd64.deb -o /tmp/zoom_setup.deb
+RUN curl -sSL $ZOOM_URL -o /tmp/zoom_setup.deb
 RUN dpkg -i /tmp/zoom_setup.deb
 RUN apt-get -f install
 RUN rm /tmp/zoom_setup.deb \
