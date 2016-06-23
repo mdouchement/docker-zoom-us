@@ -4,7 +4,7 @@
 FROM debian:jessie
 MAINTAINER mdouchement
 
-ARG ZOOM_URL=https://zoom.us/client/latest/zoom_1.1.44485.0317_amd64.deb
+ARG ZOOM_URL=https://zoom.us/client/latest/zoom_2.0.52458.0531_amd64.deb
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -26,7 +26,7 @@ RUN apt-get install -qy curl sudo desktop-file-utils lib32z1 libx11-6:i386 libeg
   libgstreamer0.10-0 libgstreamer-plugins-base0.10-0 libxi6 libsm6 \
   libfontconfig1 libpulse0 libsqlite3-0 \
   libxcb-shape0 libxcb-xfixes0 libxcb-randr0 libxcb-image0 \
-  libxcb-keysyms1 libxcb-xtest0
+  libxcb-keysyms1 libxcb-xtest0 ibus ibus-gtk libibus-qt1 ibus-qt4
 
 
 # Grab the client .deb
