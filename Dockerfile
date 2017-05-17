@@ -8,19 +8,12 @@ ARG ZOOM_URL=https://zoom.us/client/latest/zoom_2.0.52458.0531_amd64.deb
 
 ENV DEBIAN_FRONTEND noninteractive
 
-# Enable i386 arch
-RUN dpkg --add-architecture i386
-
 # Refresh package lists
 RUN apt-get update
 RUN apt-get -qy dist-upgrade
 
 # Dependencies for the client .deb
-RUN apt-get install -qy curl sudo desktop-file-utils lib32z1 libx11-6:i386 libegl1-mesa:i386 \
-  libglib2.0-0:i386 libgl1-mesa-glx:i386 libxrender1:i386 libxcomposite1:i386 libxslt1.1:i386 \
-  libgstreamer0.10-0:i386 libgstreamer-plugins-base0.10-0:i386 libxi6:i386 libsm6:i386 \
-  libfontconfig1:i386 qdbus-qt5:i386 libpulse0:i386 libsqlite3-0:i386 libxcb-shm0:i386 \
-  libxcb-shape0:i386 libxcb-xfixes0:i386 libxcb-randr0:i386 libxcb-image0:i386 \
+RUN apt-get install -qy curl sudo desktop-file-utils lib32z1 \
   libx11-6 libegl1-mesa libxcb-shm0 \
   libglib2.0-0 libgl1-mesa-glx libxrender1 libxcomposite1 libxslt1.1 \
   libgstreamer0.10-0 libgstreamer-plugins-base0.10-0 libxi6 libsm6 \
