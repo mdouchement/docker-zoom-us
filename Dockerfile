@@ -19,9 +19,9 @@ RUN apt-get install -qy curl sudo desktop-file-utils lib32z1 \
   libfontconfig1 libpulse0 libsqlite3-0 \
   libxcb-shape0 libxcb-xfixes0 libxcb-randr0 libxcb-image0 \
   libxcb-keysyms1 libxcb-xtest0 ibus ibus-gtk libibus-qt1 ibus-qt4 \
-  libnss3
+  libnss3 libxss1
 
-ARG ZOOM_URL=https://zoom.us/client/2.0.91373.0502/zoom_amd64.deb
+ARG ZOOM_URL=https://zoom.us/client/latest/zoom_amd64.deb
 
 # Grab the client .deb
 # Install the client .deb
