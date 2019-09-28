@@ -100,4 +100,5 @@ ${SUDO} docker run -d \
   ${VIDEO_DEVICES} \
   --device /dev/dri \
   ${VOLUMES} \
+  ${ZOOM_EXTRA_DOCKER_ARGUMENTS} \
   mdouchement/zoom-us:latest ${prog} $@ >/dev/null
