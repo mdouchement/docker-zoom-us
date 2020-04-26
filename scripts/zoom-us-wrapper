@@ -52,7 +52,10 @@ prepare_docker_volume_parameters() {
   touch ${XAUTH}
   xauth nlist :0 | sed -e 's/^..../ffff/' | xauth -f ${XAUTH} nmerge -
 
-  VOLUMES+=" --volume=${HOME}/.config:/home/${ZOOM_US_USER}/.config"
+  touch ${HOME}/.config/zoomus.conf # create if not exists
+
+  VOLUMES+=" --volume=${HOME}/.config/zoomus.conf:/home/${ZOOM_US_USER}/.config/zoomus.conf"
+  VOLUMES+=" --volume=${HOME}/.cache/zoom:/home/${ZOOM_US_USER}/.cache/zoom"
   VOLUMES+=" --volume=${HOME}/.zoom:/home/${ZOOM_US_USER}/.zoom"
   VOLUMES+=" --volume=${XSOCK}:${XSOCK}"
   VOLUMES+=" --volume=${XAUTH}:${XAUTH}"
@@ -101,4 +104,5 @@ ${SUDO} docker run -d \
   --device /dev/dri \
   ${VOLUMES} \
   ${ZOOM_EXTRA_DOCKER_ARGUMENTS} \
+  --name zoomus \
   mdouchement/zoom-us:latest ${prog} $@ >/dev/null
