@@ -12,7 +12,7 @@ RUN apt-get update
 RUN apt-get -qy dist-upgrade
 
 # Dependencies for the client .deb
-RUN apt-get install -qy curl sudo desktop-file-utils lib32z1 \
+RUN apt-get install -qy curl iceweasel sudo desktop-file-utils lib32z1 \
   libx11-6 libegl1-mesa libxcb-shm0 \
   libglib2.0-0 libgl1-mesa-glx libxrender1 libxcomposite1 libxslt1.1 \
   libgstreamer1.0-0 libgstreamer-plugins-base1.0-0 libxi6 libsm6 \

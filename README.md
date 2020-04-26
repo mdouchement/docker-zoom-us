@@ -45,6 +45,15 @@ This will install a wrapper script to launch `zoom`.
 >
 > If Zoom is installed on the the host then the host binary is launched instead of starting a Docker container. To force the launch of Zoom in a container use the `zoom-us-wrapper` script. For example, `zoom-us-wrapper zoom` will launch Zoom inside a Docker container regardless of whether it is installed on the host or not.
 
+## Web Browser / SSO
+
+Add the following option in `~/.config/zoomus.conf`
+```
+embeddedBrowserForSSOLogin=false
+```
+
+Zoom will spawn Iceweasel (Firefox) included in this image and open SSO provider web page.
+
 ## How it works
 
 The wrapper scripts volume mount the X11 and pulseaudio sockets in the launcher container. The X11 socket allows for the user interface display on the host, while the pulseaudio socket allows for the audio output to be rendered on the host.
