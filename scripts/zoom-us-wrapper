@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PATH=/usr/sbin:/usr/bin:/sbin:/bin:/uusr/local/bin
+PATH=/usr/sbin:/usr/bin:/sbin:/bin
 ZOOM_US_USER=zoom
 
 # do we need to use sudo to start docker containers?
