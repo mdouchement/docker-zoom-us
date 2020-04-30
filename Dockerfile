@@ -4,7 +4,6 @@
 FROM debian:buster
 MAINTAINER mdouchement
 
-
 ENV DEBIAN_FRONTEND noninteractive
 
 # Refresh package lists
@@ -29,8 +28,6 @@ ARG ZOOM_URL=https://zoom.us/client/latest/zoom_amd64.deb
 RUN curl -sSL $ZOOM_URL -o /tmp/zoom_setup.deb
 RUN dpkg -i /tmp/zoom_setup.deb
 RUN apt-get -f install
-RUN rm /tmp/zoom_setup.deb \
-  && rm -rf /var/lib/apt/lists/*
 
 COPY scripts/ /var/cache/zoom-us/
 COPY entrypoint.sh /sbin/entrypoint.sh
