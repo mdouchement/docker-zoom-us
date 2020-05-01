@@ -31,7 +31,7 @@ Alternatively you can build the image yourself.
 docker build -t mdouchement/zoom-us github.com/mdouchement/docker-zoom-us
 ```
 
-With the image locally available, install the wrapper scripts using:
+With the image locally available, install the wrapper scripts by running the following as root:
 
 ```bash
 docker run -it --rm \

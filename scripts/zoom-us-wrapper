@@ -20,8 +20,8 @@ fi;
 list_commands() {
   echo ""
   echo "Launch zoom-us using:"
-  echo "  zoom-us                     OR "
-  echo "  zoom-us-wrapper zoom-us"
+  echo "  zoom                        OR "
+  echo "  zoom-us-wrapper zoom"
   echo ""
   exit 1
 }
