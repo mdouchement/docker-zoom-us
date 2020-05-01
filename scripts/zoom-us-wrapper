@@ -16,6 +16,10 @@ DOWNLOAD_DIR=$(xdg-user-dir DOWNLOAD)
 if [ -z "${DOWNLOAD_DIR}" ]; then
     DOWNLOAD_DIR="${HOME}/Downloads"
 fi;
+DOCUMENTS_DIR=$(xdg-user-dir DOCUMENTS)
+if [ -z "${DOCUMENTS_DIR}" ]; then
+    DOCUMENTS_DIR="${HOME}/Documents"
+fi;
 
 list_commands() {
   echo ""
@@ -52,11 +56,25 @@ prepare_docker_volume_parameters() {
   touch ${XAUTH}
   xauth nlist :0 | sed -e 's/^..../ffff/' | xauth -f ${XAUTH} nmerge -
 
-  touch ${HOME}/.config/zoomus.conf # create if not exists
+  if [[ -z "${ZOOM_HOME}" ]]; then
+    ZOOM_HOME=${HOME} # Default directory
+  else
+    DOWNLOAD_DIR=${DOWNLOAD_DIR/$HOME/$ZOOM_HOME}
+    DOCUMENTS_DIR=${DOCUMENTS_DIR/$HOME/$ZOOM_HOME}
+    mkdir -p {$DOWNLOAD_DIR,$DOCUMENTS_DIR}
 
-  VOLUMES+=" --volume=${HOME}/.config/zoomus.conf:/home/${ZOOM_US_USER}/.config/zoomus.conf"
-  VOLUMES+=" --volume=${HOME}/.cache/zoom:/home/${ZOOM_US_USER}/.cache/zoom"
-  VOLUMES+=" --volume=${HOME}/.zoom:/home/${ZOOM_US_USER}/.zoom"
+    mkdir -p ${ZOOM_HOME}/{.config,.cache,.zoom}
+  fi
+
+  echo "Using ZOOM_HOME: ${ZOOM_HOME}"
+
+  touch ${ZOOM_HOME}/.config/zoomus.conf # create if not exists
+
+  VOLUMES+=" --volume=${ZOOM_HOME}/.config/zoomus.conf:/home/${ZOOM_US_USER}/.config/zoomus.conf"
+  VOLUMES+=" --volume=${ZOOM_HOME}/.cache/zoom:/home/${ZOOM_US_USER}/.cache/zoom"
+  VOLUMES+=" --volume=${ZOOM_HOME}/.zoom:/home/${ZOOM_US_USER}/.zoom"
+  VOLUMES+=" --volume=${DOWNLOAD_DIR}:/home/${SKYPE_USER}/Downloads"
+  VOLUMES+=" --volume=${DOCUMENTS_DIR}:/home/${ZOOM_US_USER}/Documents"
   VOLUMES+=" --volume=${XSOCK}:${XSOCK}"
   VOLUMES+=" --volume=${XAUTH}:${XAUTH}"
   VOLUMES+=" --volume=/run/user/${USER_UID}/pulse:/run/pulse"

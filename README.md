@@ -63,8 +63,17 @@ When the image is launched the following directories are mounted as volumes
 - `${HOME}/.zoom`
 - `${HOME}/.config`
 - `XDG_DOWNLOAD_DIR` or if it is missing `${HOME}/Downloads`
+- `XDG_DOCUMENTS_DIR` or if it is missing `${HOME}/Documents`
 
 This makes sure that your profile details are stored on the host and files received via Zoom are available on your host in the appropriate download directory.
+
+**Don't want to expose host's folders to Zoom?**
+
+Add `ZOOM_HOME` environment variable to namespace all Zoom folders:
+
+```sh
+export ZOOM_HOME=${HOME}/zoomus
+```
 
 
 # Maintenance
