@@ -100,5 +100,5 @@ docker run -it --rm \
 For debugging and maintenance purposes you may want access the containers shell. If you are using Docker version `1.3.0` or higher you can access a running containers shell by starting `bash` using `docker exec`:
 
 ```bash
-docker exec -it zoom bash
+docker exec -it zoomus bash
 ```
