@@ -102,3 +102,14 @@ For debugging and maintenance purposes you may want access the containers shell.
 ```bash
 docker exec -it zoomus bash
 ```
+
+## Troubleshooting
+
+- Zoom basic logs: `docker logs zoomus`
+- Screen sharing:
+  - Try `xhost +SI:localuser:"$USER"` [#20](/../../issues/20)
+- Transparent login form:
+  - A possible workaround is to right click on the Zoom icon from the taskbar and select "About". The about popup could fix the login form render.
+  - If `Unrecognized OpenGL version` error is in the logs, it could be an issue with Nvidia drivers [#1](/../../issues/1)
+    - @mzcu made a fix [mzcu@ee177a5](https://github.com/mzcu/docker-zoom-us/commit/ee177a5e8915a05a51080301996a8ed4b89552ee) that should work
+    - I recommend you to try his version: https://github.com/mzcu/docker-zoom-us
