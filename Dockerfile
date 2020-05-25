@@ -18,7 +18,7 @@ RUN apt-get install -qy curl iceweasel sudo desktop-file-utils lib32z1 \
   libfontconfig1 libpulse0 libsqlite3-0 \
   libxcb-shape0 libxcb-xfixes0 libxcb-randr0 libxcb-image0 \
   libxcb-keysyms1 libxcb-xtest0 ibus ibus-gtk \
-  libnss3 libxss1 xcompmgr
+  libnss3 libxss1 xcompmgr pulseaudio
 
 ARG ZOOM_URL=https://zoom.us/client/latest/zoom_amd64.deb
 
