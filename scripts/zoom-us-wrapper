@@ -73,7 +73,7 @@ prepare_docker_volume_parameters() {
   VOLUMES+=" --volume=${ZOOM_HOME}/.config/zoomus.conf:/home/${ZOOM_US_USER}/.config/zoomus.conf"
   VOLUMES+=" --volume=${ZOOM_HOME}/.cache/zoom:/home/${ZOOM_US_USER}/.cache/zoom"
   VOLUMES+=" --volume=${ZOOM_HOME}/.zoom:/home/${ZOOM_US_USER}/.zoom"
-  VOLUMES+=" --volume=${DOWNLOAD_DIR}:/home/${SKYPE_USER}/Downloads"
+  VOLUMES+=" --volume=${DOWNLOAD_DIR}:/home/${ZOOM_US_USER}/Downloads"
   VOLUMES+=" --volume=${DOCUMENTS_DIR}:/home/${ZOOM_US_USER}/Documents"
   VOLUMES+=" --volume=${XSOCK}:${XSOCK}"
   VOLUMES+=" --volume=${XAUTH}:${XAUTH}"
