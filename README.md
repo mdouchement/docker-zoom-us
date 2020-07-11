@@ -114,7 +114,9 @@ docker exec -it zoomus bash
 
 ## Troubleshooting
 
-- Zoom basic logs: `docker logs zoomus`
+- Zoom basic logs:
+  - `docker logs zoomus`
+  - `ls -l ${ZOOM_HOME:=$HOME}/.zoom/logs` where you can find application logs.
 - Screen sharing:
   - Try `xhost +SI:localuser:"$USER"` [#20](https://github.com/mdouchement/docker-zoom-us/issues/20)
 - Transparent login form:
