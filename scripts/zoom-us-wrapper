@@ -49,7 +49,7 @@ prepare_docker_env_parameters() {
   ENV_VARS+=" --env=USER_GID=${USER_GID}"
   ENV_VARS+=" --env=DISPLAY=unix$DISPLAY"
   ENV_VARS+=" --env=XAUTHORITY=${XAUTH}"
-  ENV_VARS+=" --env=TZ=$(date +%Z)"
+  ENV_VARS+=" --env=TZ=$(timedatectl show --value -p Timezone)"
 }
 
 prepare_docker_volume_parameters() {
