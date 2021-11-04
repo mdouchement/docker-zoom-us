@@ -33,6 +33,9 @@ create_user() {
   fi
   chown ${ZOOM_US_USER}:${ZOOM_US_USER} -R /home/${ZOOM_US_USER}
   adduser ${ZOOM_US_USER} sudo
+  for grp in $ZOOM_USER_GROUPS; do
+    [[ ! -z "$grp" ]] && adduser ${ZOOM_US_USER} $grp
+  done
 }
 
 grant_access_to_video_devices() {
@@ -53,8 +56,8 @@ grant_access_to_video_devices() {
 
 launch_zoom_us() {
   cd /home/${ZOOM_US_USER}
-  exec sudo -HEu ${ZOOM_US_USER} PULSE_SERVER=/run/pulse/native QT_GRAPHICSSYSTEM="native" xcompmgr -c -l0 -t0 -r0 -o.00 &
-  exec sudo -HEu ${ZOOM_US_USER} PULSE_SERVER=/run/pulse/native QT_GRAPHICSSYSTEM="native" $@
+  exec sudo -HEu ${ZOOM_US_USER} PULSE_SERVER=/run/pulse/$(basename $ZOOM_PULSE_SOCKET) QT_GRAPHICSSYSTEM="native" xcompmgr -c -l0 -t0 -r0 -o.00 &
+  exec sudo -HEu ${ZOOM_US_USER} PULSE_SERVER=/run/pulse/$(basename $ZOOM_PULSE_SOCKET) QT_GRAPHICSSYSTEM="native" $@
 }
 
 case "$1" in

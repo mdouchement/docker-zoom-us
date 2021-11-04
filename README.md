@@ -1,6 +1,6 @@
 This project is fully inspired of [sameersbn](https://github.com/sameersbn) [Skype](https://github.com/sameersbn/docker-skype)'s containerization.
 
-# mdouchement/zoom-us
+# boarfish55/zoom-us
 
 # Introduction
 
@@ -13,22 +13,22 @@ The image uses [X11](http://www.x.org) and [Pulseaudio](http://www.freedesktop.o
 If you find this image useful here's how you can help:
 
 - Send a pull request with your awesome features and bug fixes
-- Help users resolve their [issues](https://github.com/mdouchement/docker-zoom-us/issues?q=is%3Aopen+is%3Aissue).
+- Help users resolve their [issues](https://github.com/boarfish55/docker-zoom-us/issues?q=is%3Aopen+is%3Aissue).
 
 # Getting started
 
 ## Installation
 
-Automated builds of the image are available on [Dockerhub](https://hub.docker.com/r/mdouchement/zoom-us) and is the recommended method of installation.
+Automated builds of the image are available on [Github](https://ghcr.io/boarfish55/zoom-us) and is the recommended method of installation.
 
 ```bash
-docker pull mdouchement/zoom-us:latest
+docker pull ghcr.io/boarfish55/zoom-us:latest
 ```
 
 Alternatively you can build the image yourself.
 
 ```bash
-docker build -t mdouchement/zoom-us github.com/mdouchement/docker-zoom-us
+docker build -t boarfish55/zoom-us github.com/boarfish55/docker-zoom-us
 ```
 
 With the image locally available, install the wrapper scripts by running the following as root:
@@ -36,7 +36,7 @@ With the image locally available, install the wrapper scripts by running the fol
 ```bash
 docker run -it --rm \
   --volume /usr/local/bin:/target \
-  mdouchement/zoom-us:latest install
+  ghcr.io/boarfish55/zoom-us:latest install
 ```
 
 This will install a wrapper script to launch `zoom`.
@@ -85,7 +85,7 @@ To upgrade to newer releases:
   1. Download the updated Docker image:
 
   ```bash
-  docker pull mdouchement/zoom-us:latest
+  docker pull ghcr.io/boarfish55/zoom-us:latest
   ```
 
   2. Run `install` to make sure the host scripts are updated.
@@ -93,7 +93,7 @@ To upgrade to newer releases:
   ```bash
   docker run -it --rm \
     --volume /usr/local/bin:/target \
-    mdouchement/zoom-us:latest install
+    ghcr.io/boarfish55/zoom-us:latest install
   ```
 
 ## Uninstallation
@@ -101,7 +101,7 @@ To upgrade to newer releases:
 ```bash
 docker run -it --rm \
   --volume /usr/local/bin:/target \
-  mdouchement/zoom-us:latest uninstall
+  ghcr.io/boarfish55/zoom-us:latest uninstall
 ```
 
 ## Shell Access

@@ -2,12 +2,16 @@
 
 PATH=/usr/sbin:/usr/bin:/sbin:/bin
 ZOOM_US_USER=zoom
+DOCKER_IMAGE=ghcr.io/boarfish55/zoom-us:latest
 
 # do we need to use sudo to start docker containers?
 ( id -Gn | grep -q docker ) || SUDO=sudo
 
 USER_UID=$(id -u)
 USER_GID=$(id -g)
+
+ZOOM_USER_GROUPS=${ZOOM_USER_GROUPS:-""}
+ZOOM_PULSE_SOCKET=${ZOOM_PULSE_SOCKET:-"/run/user/${USER_UID}/pulse/native"}
 
 XSOCK=/tmp/.X11-unix
 XAUTH=/tmp/.docker.xauth
@@ -35,7 +39,7 @@ cleanup_stopped_zoom_us_instances(){
   for c in $(${SUDO} docker ps -a -q)
   do
     image="$(${SUDO} docker inspect -f {{.Config.Image}} ${c})"
-    if [ "${image}" == "mdouchement/zoom-us:latest" ]; then
+    if [ "${image}" == "${DOCKER_IMAGE}" ]; then
       running=$(${SUDO} docker inspect -f {{.State.Running}} ${c})
       if [ "${running}" != "true" ]; then
         ${SUDO} docker rm "${c}" >/dev/null
@@ -47,9 +51,11 @@ cleanup_stopped_zoom_us_instances(){
 prepare_docker_env_parameters() {
   ENV_VARS+=" --env=USER_UID=${USER_UID}"
   ENV_VARS+=" --env=USER_GID=${USER_GID}"
+  ENV_VARS+=" --env=ZOOM_USER_GROUPS=${ZOOM_USER_GROUPS}"
   ENV_VARS+=" --env=DISPLAY=unix$DISPLAY"
   ENV_VARS+=" --env=XAUTHORITY=${XAUTH}"
   ENV_VARS+=" --env=TZ=$(timedatectl show --value -p Timezone)"
+  ENV_VARS+=" --env=ZOOM_PULSE_SOCKET=${ZOOM_PULSE_SOCKET}"
 }
 
 prepare_docker_volume_parameters() {
@@ -77,7 +83,7 @@ prepare_docker_volume_parameters() {
   VOLUMES+=" --volume=${DOCUMENTS_DIR}:/home/${ZOOM_US_USER}/Documents"
   VOLUMES+=" --volume=${XSOCK}:${XSOCK}"
   VOLUMES+=" --volume=${XAUTH}:${XAUTH}"
-  VOLUMES+=" --volume=/run/user/${USER_UID}/pulse:/run/pulse"
+  VOLUMES+=" --volume=$(dirname ${ZOOM_PULSE_SOCKET}):/run/pulse"
 }
 
 prepare_docker_device_parameters() {
@@ -123,4 +129,4 @@ ${SUDO} docker run -d \
   ${VOLUMES} \
   ${ZOOM_EXTRA_DOCKER_ARGUMENTS} \
   --name zoomus \
-  mdouchement/zoom-us:latest ${prog} $@ >/dev/null
+  "${DOCKER_IMAGE}" ${prog} $@ >/dev/null
