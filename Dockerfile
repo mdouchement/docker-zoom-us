@@ -6,12 +6,17 @@ MAINTAINER mdouchement
 
 ENV DEBIAN_FRONTEND noninteractive
 
+COPY google-chrome.gpg /etc/apt/trusted.gpg.d/google-chrome.gpg
+RUN echo \
+	"deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" \
+	> /etc/apt/sources.list.d/google-chrome.list
+
 # Refresh package lists
 RUN apt-get update && \
 	apt-get -qy dist-upgrade && \
 	# Dependencies for the client .deb
 	apt-get install -qy --no-install-recommends curl ca-certificates \
-		firefox-esr sudo desktop-file-utils lib32z1 \
+		google-chrome-stable sudo desktop-file-utils lib32z1 \
 		libx11-6 libegl1-mesa libxcb-shm0 \
 		libglib2.0-0 libgl1-mesa-glx libxrender1 libxcomposite1 libxslt1.1 \
 		libgstreamer1.0-0 libgstreamer-plugins-base1.0-0 libxi6 libsm6 \
@@ -19,11 +24,13 @@ RUN apt-get update && \
 		libxcb-shape0 libxcb-xfixes0 libxcb-randr0 libxcb-image0 \
 		libxcb-keysyms1 libxcb-xtest0 ibus ibus-gtk \
 		libxcb-xinerama0 libxkbcommon-x11-0 \
-		libnss3 libxss1 xcompmgr pulseaudio && \
+		libnss3 libxss1 xdg-utils xcompmgr procps pulseaudio vim && \
 	 apt-get clean -y && \
 	 apt-get autoremove -y && \
 	 rm -rf /var/lib/apt/lists/*
 
+RUN sed -i 's/google-chrome-stable/google-chrome-stable --no-sandbox/' \
+	/usr/share/applications/google-chrome.desktop
 ARG ZOOM_URL=https://zoom.us/client/latest/zoom_amd64.deb
 
 # Grab the client .deb

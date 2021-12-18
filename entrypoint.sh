@@ -1,4 +1,5 @@
 #!/bin/bash
+
 set -e
 
 USER_UID=${USER_UID:-1000}
