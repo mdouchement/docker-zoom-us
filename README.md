@@ -1,3 +1,7 @@
+# You should probably use Flatpak instead which is made to run desktop application in a container via [Bubblewrap](https://github.com/containers/bubblewrap).
+
+--------------------------------------------------------------------------
+
 This project is fully inspired of [sameersbn](https://github.com/sameersbn) [Skype](https://github.com/sameersbn/docker-skype)'s containerization.
 
 # mdouchement/zoom-us
